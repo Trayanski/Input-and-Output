@@ -1,0 +1,44 @@
+import java.io.*;
+import java.util.*;
+
+public class Program {
+	public static void main(String[] args) {
+		Reader reader = new Reader();
+		String str = reader.readString();
+		int num = reader.readInt();
+		char ch = reader.readChar();
+		float floatNum = reader.readFloat();
+		
+		System.out.println(str);
+		System.out.println(num);
+		System.out.println(ch);
+		System.out.println(floatNum);				
+	}
+}
+
+class Reader{
+	
+	Scanner scanner = new Scanner(System.in);
+		
+	public String readString(){
+		String str = scanner.nextLine();
+		return str;
+	}
+	
+	public int readInt(){
+		int num = scanner.nextInt();
+		scanner.nextLine();
+		return num;
+	}
+	
+	public char readChar(){
+		char ch = scanner.next().charAt(0);
+		return ch;
+	}
+	
+	public float readFloat(){
+		float num = scanner.nextFloat();
+		scanner.nextLine();
+		return num;
+	}
+}
