@@ -16,7 +16,7 @@ public class Program {
 	}
 }
 
-class Reader{
+static class Reader{
 	
 	Scanner scanner = new Scanner(System.in);
 		
