@@ -1,0 +1,27 @@
+package com.company;
+import java.io.*;
+
+public class Problem2FromConsoleToAFile {
+
+    public static void main(String[] args) {
+
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+            String input = in.readLine();
+
+            PrintWriter out = new PrintWriter(new FileWriter("output.txt"));
+
+            while(!input.equals(".")) {
+                out.println(input);
+
+                input = in.readLine();
+            }
+
+            out.close();
+        } catch (IOException ex){
+            System.out.println("Error during reading/writing!");
+            System.out.println(ex.getMessage());
+        }
+    }
+}
