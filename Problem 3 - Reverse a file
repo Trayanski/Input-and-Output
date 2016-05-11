@@ -1,0 +1,32 @@
+package com.company;
+
+import java.io.*;
+
+public class Problem3FromFile_Reverse_ToAFile
+{
+    public static void main(String[] args) throws IOException
+    {
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("output.txt"));
+            BufferedWriter out = new BufferedWriter(new FileWriter("reversedOutput.txt"));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                char[] lineOfChars = line.toCharArray();
+                StringBuilder reversedLine = new StringBuilder();
+                for (int i = lineOfChars.length - 1; i >= 0 ; i--) {
+                    reversedLine.append(lineOfChars[i]);
+                }
+
+                line = reversedLine.toString();
+                out.write(line + "\n");
+            }
+
+            out.flush();
+            br.close();
+        }
+
+        catch(Exception e){
+            System.out.println("Something went wrong");
+        }
+    }
+}
