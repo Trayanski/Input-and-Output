@@ -1,0 +1,30 @@
+package com.company;
+
+import java.io.*;
+
+public class Problem4Streams {
+    public static void main(String[] args) {
+
+        String str = "Hello, is it me you're looking fore?";
+        
+        try {
+
+            FileOutputStream out = new FileOutputStream("test.txt");
+            ObjectOutputStream oout = new ObjectOutputStream(out);
+
+            oout.writeObject(str);
+            oout.flush();
+
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("test.txt"));
+
+            System.out.println("" + (String) ois.readObject());
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+}
+
+class TransferObject{
+
+}
