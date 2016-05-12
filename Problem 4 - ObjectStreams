@@ -3,28 +3,38 @@ package com.company;
 import java.io.*;
 
 public class Problem4Streams {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException {
 
-        String str = "Hello, is it me you're looking fore?";
+        BufferedReader in = new BufferedReader(new FileReader("input4File.txt"));
+        PrintWriter out = new PrintWriter(new FileWriter("output4File.txt"));
         
         try {
-
-            FileOutputStream out = new FileOutputStream("test.txt");
-            ObjectOutputStream oout = new ObjectOutputStream(out);
-
-            oout.writeObject(str);
-            oout.flush();
-
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("test.txt"));
-
-            System.out.println("" + (String) ois.readObject());
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            TransferObject trObj = new TransferObject();
+            trObj.TransferObject(in, out);
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            in.close();
+            out.close();
         }
     }
 }
 
-class TransferObject{
+class TransferObject {
 
+    public TransferObject() {
+
+    }
+
+    public void TransferObject(BufferedReader in, PrintWriter out) {
+        String line = "";
+
+        try {
+            while ((line = in.readLine()) != null) {
+                out.println(" " + line);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
