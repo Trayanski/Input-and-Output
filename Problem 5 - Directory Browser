@@ -1,0 +1,63 @@
+package com.company;
+
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Problem5DirectoryBrowser {
+    public static void main(String[] args) {
+        DirectoryBrowser db = new DirectoryBrowser();
+        db.listContent("E:\\HDDRecovery\\TOSHIBA.jpg");
+    }
+}
+
+class DirectoryBrowser {
+    public DirectoryBrowser(){
+
+    }
+
+    public void listContent(String path){
+        if(!path.endsWith(".txt") && !path.endsWith(".jpg") && !path.endsWith(".exe")) { //jar, java, hml...
+            Path dir = Paths.get(path);
+            System.out.printf("The content of the path %s is: \n", path);
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
+                for (Path file : stream) {
+                    System.out.println("    " + file.getFileName());
+                }
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+        } else{
+            System.out.printf("The content of the path %s is: \n", path);
+            Pattern pattern = Pattern.compile("[\\w]+[.][\\w]+");
+            Matcher matcher = pattern.matcher(path);
+            matcher.matches();
+            String match = null;
+            if (matcher.find()) {
+                match = matcher.group();
+            } else {
+                System.out.println("No match. Fix!");
+            }
+
+            path = path.substring(0,path.length() - match.length());
+            Path dir = Paths.get(path);
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
+                for (Path file : stream) {
+                    System.out.println("    " + file.getFileName());
+                }
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            } catch (Exception ex) {
+                System.err.println(ex.getMessage());
+            }
+
+            System.out.println("Your path leads to a file: " + match);
+        }
+    }
+}
