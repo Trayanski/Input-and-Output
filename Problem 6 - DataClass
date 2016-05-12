@@ -1,0 +1,36 @@
+package com.company;
+
+import java.io.*;
+
+public class Problem6DataClass {
+    public static void main(String[] args) throws IOException {
+        DataClass dc = new DataClass();
+        //ObjectOutputStream out = new ObjectOutputStream(new OutputStream());
+        Object obj = new Object();
+        //dc.saveObject(out, obj);
+    }
+}
+
+class DataClass{
+    public DataClass(){
+
+    }
+
+    public void saveObject(OutputStream out, Object o) throws IOException {
+        ObjectOutputStream oos = new ObjectOutputStream(out);
+        oos.writeObject(o);
+        oos.flush();
+        oos.close();
+    }
+
+    public Object getObject(InputStream in){
+        Object obj = new Object();
+        return obj;
+    }
+}
+
+class Serialize{
+    public Serialize(){
+        //TODO
+    }
+}
