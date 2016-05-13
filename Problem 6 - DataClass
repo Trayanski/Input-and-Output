@@ -24,13 +24,29 @@ class DataClass{
     }
 
     public Object getObject(InputStream in){
-        Object obj = new Object();
+        Object obj = new Object(); //try catch IOEx, FileNotFoungEx
         return obj;
     }
 }
 
-class Serialize{
-    public Serialize(){
-        //TODO
+class Serialization {
+
+    public static Object deserialize(String fileName) throws IOException,
+            ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(fileName);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        Object obj = ois.readObject();
+        ois.close();
+        return obj;
     }
+
+    public static void serialize(Object obj, String fileName)
+            throws IOException {
+        FileOutputStream fos = new FileOutputStream(fileName);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(obj);
+
+        fos.close();
+    }
+
 }
